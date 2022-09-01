@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, useColorScheme, View} from 'react-native';
 import {List, MD3Colors, Text} from 'react-native-paper';
 import {ExpenseItem} from './interface/Interface';
 
@@ -13,15 +13,23 @@ const ExpenseItemRenderer: React.FC<Props> = ({
   expenseItem,
   onClickExpenseItem,
 }) => {
+  const getBGColor = (isIncome: boolean) => {
+    const theme = useColorScheme();
+    if (theme == 'light') {
+      if (isIncome) return MD3Colors.primary80;
+      else return MD3Colors.secondary90;
+    } else {
+      return MD3Colors.secondary20;
+    }
+  };
+
   return (
     <View style={{paddingHorizontal: 8}}>
       <List.Item
         style={[
           styles.listItem,
           {
-            backgroundColor: expenseItem.item.isIncome
-              ? MD3Colors.primary80
-              : MD3Colors.secondary90,
+            backgroundColor: getBGColor(expenseItem.item.isIncome),
           },
         ]}
         title={expenseItem.item.name}

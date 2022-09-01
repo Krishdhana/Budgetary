@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Text} from 'react-native-paper';
 import {Dialog, Button, Portal} from 'react-native-paper';
 import {SelectedExpense} from '../../shared/interface/Interface';
 

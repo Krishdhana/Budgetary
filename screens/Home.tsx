@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {AnimatedFAB} from 'react-native-paper';
+import {View} from 'react-native';
 import {UserDataContext} from '../store/redux/userdata-context';
 
 import WelcomeTitle from '../components/Home/WelcomeTitle';

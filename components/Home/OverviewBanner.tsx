@@ -1,6 +1,7 @@
 import React from 'react';
+import {Text} from 'react-native-paper';
 
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, useColorScheme, View} from 'react-native';
 import {Surface, MD3Colors} from 'react-native-paper';
 import {ExpenseList} from '../shared/interface/Interface';
 
@@ -20,6 +21,17 @@ const OverviewBanner: React.FC<Props> = ({expenseList}) => {
     },
   ];
 
+  const color = useColorScheme();
+
+  const getBGColor = (income: string) => {
+    if (color == 'light') {
+      if (income == 'Income') return MD3Colors.primary80;
+      else return MD3Colors.secondary90;
+    } else {
+      return MD3Colors.secondary20;
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -33,8 +45,8 @@ const OverviewBanner: React.FC<Props> = ({expenseList}) => {
                 {
                   backgroundColor:
                     banner.name === 'Income'
-                      ? MD3Colors.secondary90
-                      : MD3Colors.secondary80,
+                      ? getBGColor('Income')
+                      : getBGColor('Saving'),
                 },
               ]}>
               <Text style={styles.smallTxt}>{banner.name} </Text>
@@ -46,7 +58,14 @@ const OverviewBanner: React.FC<Props> = ({expenseList}) => {
       <Surface
         key={'Balance'}
         elevation={3}
-        style={[styles.box, styles.balanceBox]}>
+        style={[
+          styles.box,
+          styles.balanceBox,
+          {
+            backgroundColor:
+              color == 'light' ? MD3Colors.primary80 : MD3Colors.secondary20,
+          },
+        ]}>
         <Text style={styles.smallTxt}>{'Balance'} </Text>
         <Text style={styles.text}>₹ {expenseList.balance} </Text>
       </Surface>
@@ -82,7 +101,6 @@ const styles = StyleSheet.create({
   },
   balanceBox: {
     width: '50%',
-    backgroundColor: MD3Colors.primary80,
     marginTop: 10,
     marginHorizontal: '25%',
   },

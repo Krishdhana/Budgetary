@@ -1,6 +1,7 @@
 import React from 'react';
+import {Text} from 'react-native-paper';
 
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {MD3Colors} from 'react-native-paper';
 
 export type Props = {

@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, useColorScheme} from 'react-native';
+import {Text} from 'react-native-paper';
 import {List, MD3Colors} from 'react-native-paper';
 
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -27,6 +28,8 @@ const ExpenseItemOptionSheet: React.FC<Props> = ({
     getSelectedAction(option);
     closeSheet();
   };
+
+  const theme = useColorScheme();
 
   const expenseItemOptions = [
     {
@@ -61,7 +64,7 @@ const ExpenseItemOptionSheet: React.FC<Props> = ({
           backgroundColor: '#000',
         },
         container: {
-          backgroundColor: MD3Colors.primary95,
+          backgroundColor: theme == 'dark' ? '#1b1d21' : MD3Colors.primary95,
         },
       }}>
       <Text style={{fontSize: 16, textAlign: 'center', marginVertical: 10}}>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StatusBar, Text} from 'react-native';
+import {StatusBar} from 'react-native';
 import {
   BottomNavigation,
   DefaultTheme,
@@ -18,7 +18,6 @@ const SettingRoute = () => <Settings />;
 const App = () => {
   const customTheme = {
     ...DefaultTheme,
-    dark: false,
     roundness: 2,
     version: 3,
     colors: {
@@ -60,7 +59,7 @@ const App = () => {
       <StatusBar
         barStyle={'dark-content'}
         backgroundColor={MD3Colors.primary90}></StatusBar>
-      <PaperProvider theme={customTheme}>
+      <PaperProvider>
         <UserDataContextProvider>
           <BottomNavigation
             navigationState={{index, routes}}

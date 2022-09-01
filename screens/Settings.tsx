@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {StyleSheet, Text, ToastAndroid, View} from 'react-native';
+import {StyleSheet, ToastAndroid, View} from 'react-native';
+import {Text} from 'react-native-paper';
 import {Button, IconButton, TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -27,10 +28,6 @@ const Settings = () => {
     UserDataCtx.expenseList[0].balance || '0',
   );
 
-  useEffect(() => {
-    setBalance(UserDataCtx.expenseList[0].balance);
-  }, [UserDataCtx.expenseList[0].balance]);
-
   const updateUserData = () => {
     if (isNaN(+balance) || isNaN(+income)) {
       ToastAndroid.show('Balance and Income should be Numbers', 4000);
@@ -48,63 +45,74 @@ const Settings = () => {
     }
   };
 
+  const enableEditMode = () => {
+    setName(UserDataCtx.userInfo?.name);
+    setRole(UserDataCtx.userInfo?.role);
+    setIncome(UserDataCtx.userInfo.income);
+    setBalance(UserDataCtx.expenseList[0].balance);
+
+    setEditMode(true);
+  };
+
   return (
     <Wrapper>
       <View>
         <Text style={styles.title}>Settings</Text>
         <View style={styles.container}>
-          <View style={styles.flex}>
-            <Text style={{fontSize: 16}}>User Details</Text>
-            {!isEditMode && (
-              <IconButton
-                icon="account-edit-outline"
-                size={20}
-                onPress={() => setEditMode(true)}
+          {isEditMode && (
+            <>
+              <View style={styles.flex}>
+                <Text style={{fontSize: 16}}>User Details</Text>
+              </View>
+              <TextInput
+                style={styles.textInput}
+                disabled={!isEditMode}
+                mode="flat"
+                label="Name"
+                value={name}
+                onChangeText={setName}
+                dense={true}
               />
-            )}
-          </View>
-          <TextInput
-            style={styles.textInput}
-            disabled={!isEditMode}
-            mode="flat"
-            label="Name"
-            value={name}
-            onChangeText={setName}
-            dense={true}
-          />
-          <TextInput
-            style={styles.textInput}
-            mode="flat"
-            disabled={!isEditMode}
-            value={role}
-            onChangeText={setRole}
-            label="Role"
-            dense={true}
-          />
-          <TextInput
-            style={styles.textInput}
-            mode="flat"
-            disabled={!isEditMode}
-            label="Income"
-            value={income.toString()}
-            keyboardType="numeric"
-            onChangeText={setIncome}
-            dense={true}
-          />
-          <TextInput
-            style={styles.textInput}
-            mode="flat"
-            disabled={!isEditMode}
-            keyboardType="numeric"
-            label="Balance"
-            value={balance.toString()}
-            onChangeText={setBalance}
-            dense={true}
-          />
+              <TextInput
+                style={styles.textInput}
+                mode="flat"
+                disabled={!isEditMode}
+                value={role}
+                onChangeText={setRole}
+                label="Role"
+                dense={true}
+              />
+              <TextInput
+                style={styles.textInput}
+                mode="flat"
+                disabled={!isEditMode}
+                label="Income"
+                value={income.toString()}
+                keyboardType="numeric"
+                onChangeText={setIncome}
+                dense={true}
+              />
+              <TextInput
+                style={styles.textInput}
+                mode="flat"
+                disabled={!isEditMode}
+                keyboardType="numeric"
+                label="Balance"
+                value={balance.toString()}
+                onChangeText={setBalance}
+                dense={true}
+              />
+            </>
+          )}
           <View style={styles.btnContainer}>
             {isEditMode && (
               <Button mode="contained-tonal" onPress={updateUserData}>
                 Update
+              </Button>
+            )}
+            {!isEditMode && (
+              <Button mode="contained-tonal" onPress={enableEditMode}>
+                Edit
               </Button>
             )}
             <Button

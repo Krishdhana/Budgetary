@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {UserDataContext} from '../../store/redux/userdata-context';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
+import {Text} from 'react-native-paper';
 import ExpenseItemRenderer from '../shared/ExpenseItemRenderer';
 
 const ExpenseListHistory = () => {

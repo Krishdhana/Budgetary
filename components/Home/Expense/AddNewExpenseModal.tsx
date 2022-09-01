@@ -7,10 +7,12 @@ import {
   TextInput,
   MD3Colors,
   RadioButton,
+  useTheme,
 } from 'react-native-paper';
 import {useContext, useEffect, useState} from 'react';
 import {UserDataContext} from '../../../store/redux/userdata-context';
-import {StyleSheet, Text, ToastAndroid, View} from 'react-native';
+import {StyleSheet, ToastAndroid, useColorScheme, View} from 'react-native';
+import {Text} from 'react-native-paper';
 import {SelectedExpense} from '../../shared/interface/Interface';
 
 export type Props = {
@@ -34,8 +36,10 @@ const AddNewExpenseModal: React.FC<Props> = ({
     'CASH' | 'BANK' | 'CREDIT_CARD' | null
   >('CASH');
 
+  const theme = useColorScheme();
+
   const containerStyle = {
-    backgroundColor: MD3Colors.primary95,
+    backgroundColor: theme == 'dark' ? '#1b1d21' : MD3Colors.primary95,
     padding: 20,
     borderRadius: 20,
   };

@@ -1,5 +1,7 @@
 import React from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
+import {Text} from 'react-native-paper';
+
 import {useContext, useEffect, useState} from 'react';
 
 import {UserDataContext} from '../../../store/redux/userdata-context';
